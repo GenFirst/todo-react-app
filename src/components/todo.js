@@ -5,6 +5,12 @@ class Todo extends React.Component {
 
   constructor(props) {
     super(props);
+
+    this.deleteTodo = this.deleteTodo.bind(this);
+  }
+
+  deleteTodo() {
+    this.props.onRemove(this.props.index);
   }
 
   render () {
@@ -17,7 +23,7 @@ class Todo extends React.Component {
           <lable>{this.props.todo}</lable>
         </Col>
         <Col xs={2}>
-          <Button><i className="fa fa-trash" aria-hidden="true"></i></Button>
+          <Button onClick={this.deleteTodo}><i className="fa fa-trash" aria-hidden="true"></i></Button>
         </Col>
       </FormGroup>
     )
