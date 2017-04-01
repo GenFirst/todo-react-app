@@ -17,7 +17,7 @@ class Todo extends React.Component {
           <lable>{this.props.todo}</lable>
         </Col>
         <Col xs={2}>
-          <Button>Remove</Button>
+          <Button><i className="fa fa-trash" aria-hidden="true"></i></Button>
         </Col>
       </FormGroup>
     )
