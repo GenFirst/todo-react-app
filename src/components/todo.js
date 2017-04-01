@@ -12,6 +12,7 @@ class Todo extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.checkEditingFinished = this.checkEditingFinished.bind(this);
     this.handlingLostFocus = this.handlingLostFocus.bind(this);
+    this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
   }
 
   deleteTodo() {
@@ -19,7 +20,7 @@ class Todo extends React.Component {
   }
 
   changeToEditMode() {
-    this.setState({editMode: true, value: this.props.todo});
+    this.setState({editMode: true, value: this.props.todo.value});
   }
 
   handleChange(event) {
@@ -45,7 +46,7 @@ class Todo extends React.Component {
 
       let editedTodo = {index: this.props.index, value: this.state.value};
       this.setState({ value: '', showError: false, editMode: false });
-      this.props.editFinished(editedTodo.index, editedTodo.value);
+      this.props.editFinished(editedTodo.index, editedTodo.value, this.props.todo.finsihed);
     } else if (event.keyCode === 27) {
       event.preventDefault();
 
@@ -61,7 +62,11 @@ class Todo extends React.Component {
 
     let editedTodo = {index: this.props.index, value: this.state.value};
     this.setState({ showError: false, value: '', editMode: false });
-    this.props.editFinished(editedTodo.index, editedTodo.value);
+    this.props.editFinished(editedTodo.index, editedTodo.value, this.props.todo.finsihed);
+  }
+
+  handleCheckboxChange() {
+    this.props.editFinished(this.props.index, this.props.todo.value, !this.props.todo.finished)
   }
 
   render () {
@@ -85,10 +90,10 @@ class Todo extends React.Component {
       return (
         <FormGroup controlId="formEditTodo">
           <Col xs={1}>
-            <Checkbox checked />
+            <Checkbox checked={this.props.todo.finished} onChange={this.handleCheckboxChange}/>
           </Col>
           <Col xs={10}>
-            <label className="todo-label" onDoubleClick={() => this.changeToEditMode()}>{this.props.todo}</label>
+            <label className="todo-label" onDoubleClick={() => this.changeToEditMode()}>{this.props.todo.value}</label>
           </Col>
           <Col xs={1}>
             <Button onClick={this.deleteTodo}><i className="fa fa-trash" aria-hidden="true"></i></Button>

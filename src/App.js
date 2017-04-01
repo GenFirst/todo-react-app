@@ -11,7 +11,11 @@ class App extends Component {
   constructor()
   {
     super();
-    this.state = { todos: ['1', '2', '3'] };
+    this.state = { todos: [
+      {value: '1', finished: false },
+      {value: '2', finished: true },
+      {value: '3', finished: false }
+    ]};
 
     // This binding is necessary to make `this` work in the callback
     this.handleNewTodo = this.handleNewTodo.bind(this);
@@ -21,7 +25,7 @@ class App extends Component {
 
   handleNewTodo(newTodo) {
     var newTodos = this.state.todos.slice();
-    newTodos.push(newTodo.value);
+    newTodos.push({value: newTodo.value, finished: false });
     this.setState({ todos: newTodos });
   }
 
@@ -31,9 +35,13 @@ class App extends Component {
     this.setState({todos: newTodos});
   }
 
-  handleEditingTodo(index, newValue) {
+  handleEditingTodo(index, newValue, isFinished) {
     var newTodos = this.state.todos.slice();
-    newTodos[index] = newValue;
+    if (newTodos[index]) {
+      newTodos[index].value = newValue;
+      newTodos[index].finished = isFinished;
+    }
+    
     this.setState({todos: newTodos});
   }
 
