@@ -16,6 +16,7 @@ class App extends Component {
     // This binding is necessary to make `this` work in the callback
     this.handleNewTodo = this.handleNewTodo.bind(this);
     this.handleRemovingTodo = this.handleRemovingTodo.bind(this);
+    this.handleEditingTodo = this.handleEditingTodo.bind(this);
   }
 
   handleNewTodo(newTodo) {
@@ -30,9 +31,15 @@ class App extends Component {
     this.setState({todos: newTodos});
   }
 
+  handleEditingTodo(index, newValue) {
+    var newTodos = this.state.todos.slice();
+    newTodos[index] = newValue;
+    this.setState({todos: newTodos});
+  }
+
   getTodos(todo, index) {
     return (
-      <Todo key={index} todo={todo} index={index} onRemove={this.handleRemovingTodo}/>
+      <Todo key={index} todo={todo} index={index} onRemove={this.handleRemovingTodo} editFinished={this.handleEditingTodo}/>
     );
   }
 
