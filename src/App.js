@@ -11,7 +11,16 @@ class App extends Component {
   constructor()
   {
     super();
-    this.todos = ['1', '2', '3'];
+    this.state = { todos: ['1', '2', '3'] };
+
+    // This binding is necessary to make `this` work in the callback
+    this.handleNewTodo = this.handleNewTodo.bind(this);
+  }
+
+  handleNewTodo(newTodo) {
+    var newTodos = this.state.todos.slice();
+    newTodos.push(newTodo.value);
+    this.setState({ todos: newTodos });
   }
 
   getTodos(todo) {
@@ -21,7 +30,7 @@ class App extends Component {
   }
 
   render() {
-    let newTodos = this.todos.map(todo => this.getTodos(todo));
+    let newTodos = this.state.todos.map(todo => this.getTodos(todo));
     return (
       <div>
         <Header />
@@ -34,13 +43,13 @@ class App extends Component {
             </Row>
             <Row>
               <Col xs={6} xsOffset={3}>
-                <NewTodo />
+                <NewTodo addNewTodo={this.handleNewTodo}/>
 
                 {newTodos}
               </Col>
             </Row>
             <Row>
-              <TodoListFooter todosLength={this.todos.length} />
+              <TodoListFooter todosLength={this.state.todos.length} />
             </Row>
           </Grid>
         </Form>
