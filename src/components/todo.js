@@ -6,7 +6,7 @@ class Todo extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {editMode: false, value: '', showError: false};
+    this.state = {editMode: false, value: '', showError: false, isFinished: this.props.todo.finished};
 
     this.deleteTodo = this.deleteTodo.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -66,7 +66,9 @@ class Todo extends React.Component {
   }
 
   handleCheckboxChange() {
-    this.props.editFinished(this.props.index, this.props.todo.value, !this.props.todo.finished)
+    let toggledFinish = !this.state.isFinished;
+    this.setState({ isFinished: toggledFinish});
+    this.props.editFinished(this.props.index, this.props.todo.value, toggledFinish)
   }
 
   render () {
@@ -90,7 +92,7 @@ class Todo extends React.Component {
       return (
         <FormGroup controlId="formEditTodo">
           <Col xs={1}>
-            <Checkbox checked={this.props.todo.finished} onChange={this.handleCheckboxChange}/>
+            <Checkbox checked={this.state.isFinished} onChange={this.handleCheckboxChange}/>
           </Col>
           <Col xs={10}>
             <label className="todo-label" onDoubleClick={() => this.changeToEditMode()}>{this.props.todo.value}</label>
