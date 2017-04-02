@@ -5,6 +5,8 @@ import Header from './components/header';
 import Todo from './components/todo';
 import TodoListFooter from './components/todo.list.footer';
 import NewTodo from './components/new.todo';
+import { ALL, ACTIVE, COMPLETED} from './utils/constants';
+import uuid from 'uuid/v4';
 
 class App extends Component {
 
@@ -12,20 +14,22 @@ class App extends Component {
   {
     super();
     this.state = { todos: [
-      {value: '1', finished: false },
-      {value: '2', finished: true },
-      {value: '3', finished: false }
-    ]};
+      {value: '1', finished: false, id: uuid() },
+      {value: '2', finished: true, id: uuid() },
+      {value: '3', finished: false, id: uuid() }],
+      nowShowing: ALL
+    };
 
     // This binding is necessary to make `this` work in the callback
     this.handleNewTodo = this.handleNewTodo.bind(this);
     this.handleRemovingTodo = this.handleRemovingTodo.bind(this);
     this.handleEditingTodo = this.handleEditingTodo.bind(this);
+    this.handleFilterChange = this.handleFilterChange.bind(this);
   }
 
   handleNewTodo(newTodo) {
     var newTodos = this.state.todos.slice();
-    newTodos.push({value: newTodo.value, finished: false });
+    newTodos.push({value: newTodo.value, finished: false, id: uuid() });
     this.setState({ todos: newTodos });
   }
 
@@ -41,18 +45,47 @@ class App extends Component {
       newTodos[index].value = newValue;
       newTodos[index].finished = isFinished;
     }
-    
+
     this.setState({todos: newTodos});
+  }
+
+  handleFilterChange(newFilter) {
+    this.setState({nowShowing: newFilter});
+  }
+
+  filterAll(value) {
+    return true;
+  }
+
+  filterCompleted(value) {
+    return value.finished;
+  }
+
+  filterActive(value) {
+    return !value.finished;
   }
 
   getTodos(todo, index) {
     return (
-      <Todo key={index} todo={todo} index={index} onRemove={this.handleRemovingTodo} editFinished={this.handleEditingTodo}/>
+      <Todo key={todo.id} todo={todo} index={index} onRemove={this.handleRemovingTodo} editFinished={this.handleEditingTodo}/>
     );
   }
 
   render() {
-    let newTodos = this.state.todos.map((todo, index) => this.getTodos(todo, index));
+    let filterTodos = this.filterAll;
+    switch (this.state.nowShowing) {
+      case ACTIVE:
+        filterTodos = this.filterActive;
+        break;
+      case COMPLETED:
+        filterTodos = this.filterCompleted;
+        break;
+      default:
+        filterTodos = this.filterAll;
+        break;
+    }
+
+    let newTodos = this.state.todos.filter(filterTodos).map((todo, index) => this.getTodos(todo, index));
     return (
       <div>
         <Header />
@@ -71,7 +104,7 @@ class App extends Component {
               </Col>
             </Row>
             <Row>
-              <TodoListFooter todosLength={this.state.todos.length} />
+              <TodoListFooter todosLength={this.state.todos.filter(this.filterActive).length} activeState={this.state.nowShowing} changeFilter={this.handleFilterChange}/>
             </Row>
           </Grid>
         </Form>
