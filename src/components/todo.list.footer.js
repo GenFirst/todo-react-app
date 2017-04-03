@@ -4,10 +4,6 @@ import { ALL, ACTIVE, COMPLETED} from '../utils/constants';
 
 class TodoListFooter extends React.Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   render () {
     return (
       <Col xs={6} xsOffset={3}>

@@ -1,6 +1,6 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom'
-import { Col, Grid, Row, FormGroup, FormControl, Checkbox, Button, Label } from 'react-bootstrap';
+import { Col, FormGroup, FormControl, Checkbox, Button } from 'react-bootstrap';
 
 class Todo extends React.Component {
 

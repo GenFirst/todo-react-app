@@ -1,5 +1,7 @@
 import React from 'react';
-import { Navbar, NavItem, Nav } from 'react-bootstrap';
+import { Link } from 'react-router-dom'
+import { Navbar, Nav } from 'react-bootstrap';
+import ListItemLink from './list.item.link';
 
 class Header extends React.Component {
 
@@ -8,14 +10,14 @@ class Header extends React.Component {
       <Navbar inverse collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="#">TODOs Application</a>
+            <Link to="/">TODOs Application</Link>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav pullRight>
-            <NavItem eventKey={1} href="#">TODOs</NavItem>
-            <NavItem eventKey={2} href="#">About</NavItem>
+            <ListItemLink to="/">TODOs</ListItemLink>
+            <ListItemLink to="/about">About</ListItemLink>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

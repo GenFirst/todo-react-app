@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Col, Grid, Row, FormGroup, FormControl, Form, Button, ButtonGroup } from 'react-bootstrap';
+import { Col, Grid, Row, Form } from 'react-bootstrap';
 import './App.css';
-import Header from './components/header';
 import Todo from './components/todo';
 import TodoListFooter from './components/todo.list.footer';
 import NewTodo from './components/new.todo';
@@ -87,28 +86,25 @@ class App extends Component {
 
     let newTodos = this.state.todos.filter(filterTodos).map((todo, index) => this.getTodos(todo, index));
     return (
-      <div>
-        <Header />
-        <Form horizontal>
-          <Grid>
-            <Row>
-              <Col xs={12}>
-                <h1 className="text-center">TODOs tasks</h1>
-              </Col>
-            </Row>
-            <Row>
-              <Col xs={6} xsOffset={3}>
-                <NewTodo addNewTodo={this.handleNewTodo}/>
+      <Form horizontal>
+        <Grid>
+          <Row>
+            <Col xs={12}>
+              <h1 className="text-center">TODOs tasks</h1>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={6} xsOffset={3}>
+              <NewTodo addNewTodo={this.handleNewTodo}/>
 
-                {newTodos}
-              </Col>
-            </Row>
-            <Row>
-              <TodoListFooter todosLength={this.state.todos.filter(this.filterActive).length} activeState={this.state.nowShowing} changeFilter={this.handleFilterChange}/>
-            </Row>
-          </Grid>
-        </Form>
-      </div>
+              {newTodos}
+            </Col>
+          </Row>
+          <Row>
+            <TodoListFooter todosLength={this.state.todos.filter(this.filterActive).length} activeState={this.state.nowShowing} changeFilter={this.handleFilterChange}/>
+          </Row>
+        </Grid>
+      </Form>
     );
   }
 }
