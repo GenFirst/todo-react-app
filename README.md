@@ -10,8 +10,15 @@ Live demo can be found [here](https://genfirst.github.io/todo-react-app/).
 
 * [Node.js](https://nodejs.org/en/)
 * [Create React App](https://github.com/facebookincubator/create-react-app)
+
+# Libraries we are using
+
+* [React](https://facebook.github.io/react/)
+* [React Bootstrap](https://react-bootstrap.github.io/)
 * [Bootstrap 3](http://getbootstrap.com/)
 * [Font Awesome](http://fontawesome.io/)
+* [React Router](https://github.com/ReactTraining/react-router)
+* [Redux](http://redux.js.org/)
 
 # How to start application
 
