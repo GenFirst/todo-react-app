@@ -1,5 +1,7 @@
 import React from 'react';
 import { FormGroup, FormControl } from 'react-bootstrap';
+import { addTodo } from '../actions/actions';
+import { connect } from 'react-redux';
 
 class NewTodo extends React.Component {
 
@@ -54,4 +56,21 @@ class NewTodo extends React.Component {
   }
 }
 
-export default NewTodo;
+const mapStateToProps = (state) => {
+  return {};
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addNewTodo: (newTodo) => {
+      dispatch(addTodo(newTodo.value))
+    }
+  };
+}
+
+const VisibleNewTodo = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NewTodo);
+
+export default VisibleNewTodo;

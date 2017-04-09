@@ -16,7 +16,7 @@ class Todo extends React.Component {
   }
 
   deleteTodo() {
-    this.props.onRemove(this.props.index);
+    this.props.onRemove(this.props.todo.id);
   }
 
   changeToEditMode() {
@@ -46,7 +46,7 @@ class Todo extends React.Component {
 
       let editedTodo = {index: this.props.index, value: this.state.value};
       this.setState({ value: '', showError: false, editMode: false });
-      this.props.editFinished(editedTodo.index, editedTodo.value, this.props.todo.finsihed);
+      this.props.editFinished(this.props.todo.id, editedTodo.value, this.props.todo.finsihed);
     } else if (event.keyCode === 27) {
       event.preventDefault();
 
@@ -62,13 +62,13 @@ class Todo extends React.Component {
 
     let editedTodo = {index: this.props.index, value: this.state.value};
     this.setState({ showError: false, value: '', editMode: false });
-    this.props.editFinished(editedTodo.index, editedTodo.value, this.props.todo.finsihed);
+    this.props.editFinished(this.props.todo.id, editedTodo.value, this.props.todo.finsihed);
   }
 
   handleCheckboxChange() {
     let toggledFinish = !this.state.isFinished;
     this.setState({ isFinished: toggledFinish});
-    this.props.editFinished(this.props.index, this.props.todo.value, toggledFinish)
+    this.props.editFinished(this.props.todo.id, this.props.todo.value, toggledFinish)
   }
 
   render () {

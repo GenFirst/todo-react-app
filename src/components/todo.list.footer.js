@@ -1,6 +1,8 @@
 import React from 'react';
 import { Col, Button, ButtonGroup } from 'react-bootstrap';
 import { ALL, ACTIVE, COMPLETED} from '../utils/constants';
+import { setVisibilityFilter } from '../actions/actions';
+import { connect } from 'react-redux';
 
 class TodoListFooter extends React.Component {
 
@@ -20,4 +22,25 @@ class TodoListFooter extends React.Component {
   }
 }
 
-export default TodoListFooter;
+const mapStateToProps = (state) => {
+  return {
+    activeState: state.visibilityFilter,
+    todosLength: state.todos.length
+  };
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeFilter: (newFilter) => {
+      dispatch(setVisibilityFilter(newFilter))
+    }
+  };
+}
+
+const VisibleTodoListFooter = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TodoListFooter);
+
+
+export default VisibleTodoListFooter;
