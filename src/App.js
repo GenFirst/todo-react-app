@@ -4,8 +4,7 @@ import './App.css';
 import Todo from './components/todo';
 import VisibleTodoListFooter from './components/todo.list.footer';
 import VisibleNewTodo from './components/new.todo';
-import { ALL, ACTIVE, COMPLETED} from './utils/constants';
-import uuid from 'uuid/v4';
+import { ACTIVE, COMPLETED} from './utils/constants';
 import { connect } from 'react-redux';
 import { deleteTodo, editTodo } from './actions/actions';
 
