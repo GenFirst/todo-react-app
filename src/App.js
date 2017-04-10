@@ -69,7 +69,7 @@ class App extends Component {
             </Col>
           </Row>
           <Row>
-            <Col xs={6} xsOffset={3}>
+            <Col xs={12} smOffset={3} sm={6}>
               <VisibleNewTodo />
 
               {newTodos}

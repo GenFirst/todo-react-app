@@ -8,7 +8,7 @@ class TodoListFooter extends React.Component {
 
   render () {
     return (
-      <Col xs={6} xsOffset={3}>
+      <Col xs={12} smOffset={3} sm={6}>
         <Col xs={3}><p>{this.props.todosLength} items left</p></Col>
         <Col xs={9}>
           <ButtonGroup>

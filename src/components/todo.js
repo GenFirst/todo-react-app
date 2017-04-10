@@ -94,7 +94,7 @@ class Todo extends React.Component {
           <Col xs={1}>
             <Checkbox checked={this.state.isFinished} onChange={this.handleCheckboxChange}/>
           </Col>
-          <Col xs={10}>
+          <Col xs={9}>
             <label className="todo-label" onDoubleClick={() => this.changeToEditMode()}>{this.props.todo.value}</label>
           </Col>
           <Col xs={1}>
