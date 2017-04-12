@@ -2,6 +2,7 @@ import React from 'react';
 import { FormGroup, FormControl } from 'react-bootstrap';
 import { addTodo } from '../actions/actions';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 class NewTodo extends React.Component {
 
@@ -55,6 +56,10 @@ class NewTodo extends React.Component {
     )
   }
 }
+
+NewTodo.propTypes = {
+  addNewTodo: PropTypes.func.isRequired
+};
 
 const mapStateToProps = (state) => {
   return {};

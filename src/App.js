@@ -7,6 +7,7 @@ import VisibleNewTodo from './components/new.todo';
 import { ACTIVE, COMPLETED} from './utils/constants';
 import { connect } from 'react-redux';
 import { deleteTodo, editTodo } from './actions/actions';
+import PropTypes from 'prop-types';
 
 class App extends Component {
 
@@ -83,6 +84,17 @@ class App extends Component {
     );
   }
 }
+
+App.propTypes = {
+  nowShowing: PropTypes.symbol.isRequired,
+  deleteTodo: PropTypes.func.isRequired,
+  editTodo: PropTypes.func.isRequired,
+  todos: PropTypes.arrayOf(PropTypes.shape({
+    finished: PropTypes.bool.isRequired,
+    value: PropTypes.string,
+    id: PropTypes.string.isRequired
+  })).isRequired
+};
 
 const mapStateToProps = (state) => {
   return {

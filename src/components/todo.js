@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
 import { Col, FormGroup, FormControl, Checkbox, Button } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
 class Todo extends React.Component {
 
@@ -105,5 +106,16 @@ class Todo extends React.Component {
     }
   }
 }
+
+Todo.propTypes = {
+  todo: PropTypes.shape({
+    finished: PropTypes.bool.isRequired,
+    value: PropTypes.string,
+    id: PropTypes.string.isRequired
+  }),
+  editFinished: PropTypes.func.isRequired,
+  onRemove: PropTypes.func.isRequired,
+  index: PropTypes.number.isRequired
+};
 
 export default Todo;

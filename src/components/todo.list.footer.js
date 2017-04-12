@@ -3,6 +3,7 @@ import { Col, Button, ButtonGroup } from 'react-bootstrap';
 import { ALL, ACTIVE, COMPLETED} from '../utils/constants';
 import { setVisibilityFilter } from '../actions/actions';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 class TodoListFooter extends React.Component {
 
@@ -21,6 +22,12 @@ class TodoListFooter extends React.Component {
     )
   }
 }
+
+TodoListFooter.propTypes = {
+  changeFilter: PropTypes.func.isRequired,
+  activeState: PropTypes.symbol.isRequired,
+  todosLength: PropTypes.number.isRequired
+};
 
 const mapStateToProps = (state) => {
   return {
